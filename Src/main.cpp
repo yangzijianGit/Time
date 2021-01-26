@@ -13,8 +13,8 @@ int main()
 {
     while (true)
     {
-        auto time = GetCurrentTimeMsec();
-        auto time2 = GetCurrentTimeMsec2();
+        auto time = Time::GetCurrentTimeMsec();
+        auto time2 = Time::GetCurrentTimeMsec2();
         static auto lastT1 = time, lastT2 = time2;
         static auto beginT1 = time, beginT2 = time2;
         std::cout << time - beginT1 << " " << time2 - beginT2 << std::endl;
