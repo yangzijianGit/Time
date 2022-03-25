@@ -1,8 +1,9 @@
-/*** 
+/***
  * @Author       : yangzijian
  * @Description  : Time
  * @Date         : 2021-01-25 15:22:55
  */
+#pragma once
 
 #include <time.h>
 #ifdef _WIN32
@@ -10,10 +11,10 @@
 #include <winbase.h>
 #endif
 
-class Time
+class CTime
 {
 public:
-    static unsigned long long GetCurrentTimeMsec()
+    static unsigned long long GetCurrentTimeMsec_TimeOfDay()
     {
 #ifdef _WIN32
         struct timeval tv;
@@ -39,8 +40,23 @@ public:
 #endif
     }
 
-    static unsigned long long GetCurrentTimeMsec2()
+    static unsigned long long GetCurrentTimeMsec_Clock()
     {
         return (unsigned long long)clock();
+    }
+
+    void TestTimeOffset()
+    {
+        while (true)
+        {
+            auto time = GetCurrentTimeMsec_TimeOfDay();
+            auto time2 = GetCurrentTimeMsec_Clock();
+            static auto lastT1 = time, lastT2 = time2;
+            static auto beginT1 = time, beginT2 = time2;
+            std::cout << time - beginT1 << " " << time2 - beginT2 << std::endl;
+            std::cout << time - lastT1 << " " << time2 - lastT2 << std::endl;
+            lastT1 = time, lastT2 = time2;
+            Sleep(16);
+        }
     }
 };
