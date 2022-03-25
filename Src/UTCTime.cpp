@@ -113,7 +113,7 @@ int UTCTime::GetSeason(tm &_Tm)
         return 4;
 }
 
-int UTCTime::Test()
+void UTCTime::Test()
 {
     
     UTCTime::InitUTC(8);
